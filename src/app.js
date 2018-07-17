@@ -15,11 +15,10 @@ if (process.env.NODE_ENV === 'dev')
 app.use('/', routes)
 
 app.use((req, res, next) => {
-    const err = new Error('Not Found')
-    err.status = 404
-    err.data = [
-        { page: "Now Found" }
-    ]
+    const err = {
+        message: "Page Not Found",
+        status: 404
+    }
     next(err)
 })
 

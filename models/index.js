@@ -13,6 +13,11 @@ const sequelize = new Sequelize(DB_NAME, DB_USERNAME, DB_PASSWORD, {
         min: 0,
         acquire: 30000,
         idle: 10000
+    },
+    dialectOptions: {
+        socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
+        supportBigNumbers: true,
+        bigNumberStrings: true
     }
 })
 
