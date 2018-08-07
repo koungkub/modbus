@@ -9,8 +9,11 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-if (process.env.NODE_ENV === 'dev')
+const logger = process.env.NODE_ENV || 'prod'
+
+if (logger === 'dev') {
     app.use(morgan('dev'))
+}
 
 app.use('/', routes)
 
