@@ -6,7 +6,7 @@ const db = {}
 const basename = path.basename(__filename)
 const { DB_NAME, DB_USERNAME, DB_PASSWORD } = process.env
 const sequelize = new Sequelize(DB_NAME, DB_USERNAME, DB_PASSWORD, {
-    host: 'localhost',
+    host: 'db',
     dialect: 'mysql',
     pool: {
         max: 20,
