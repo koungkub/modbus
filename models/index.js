@@ -4,20 +4,15 @@ const Sequelize = require('sequelize')
 
 const db = {}
 const basename = path.basename(__filename)
-const { DB_NAME, DB_USERNAME, DB_PASSWORD } = process.env
+const { DB_NAME, DB_USERNAME, DB_PASSWORD, DB_HOST } = process.env
 const sequelize = new Sequelize(DB_NAME, DB_USERNAME, DB_PASSWORD, {
-    host: 'db',
+    host: DB_HOST,
     dialect: 'mysql',
     pool: {
         max: 20,
         min: 0,
         acquire: 30000,
         idle: 10000
-    },
-    dialectOptions: {
-        socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
-        supportBigNumbers: true,
-        bigNumberStrings: true
     }
 })
 
