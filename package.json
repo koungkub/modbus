@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node -r dotenv/config src/index.js",
+    "start": "node dist/bundle.js",
     "dev": "nodemon -r dotenv/config src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "yarn clean && webpack --config webpack.config.js",
+    "clean": "rimraf dist"
   },
   "author": "",
   "license": "ISC",
@@ -16,8 +17,15 @@
     "dotenv": "^4.0.0",
     "express": "^4.16.3",
     "express-validator": "^4.3.0",
-    "morgan": "^1.9.0",
-    "mysql2": "^1.5.3",
-    "sequelize": "^4.37.10"
-  }
+    "fs": "^0.0.1-security",
+    "morgan": "^1.9.1",
+    "mysql2": "^1.6.1",
+    "path": "^0.12.7",
+    "sequelize": "^4.37.10",
+    "sequelize-cli": "^5.2.0",
+    "webpack": "^4.22.0",
+    "webpack-cli": "^3.1.2",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "devDependencies": {}
 }

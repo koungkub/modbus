@@ -1,5 +1,4 @@
 const app = require('./app')
-const models = require('../models')
 
 const { PORT = 3000 } = process.env
 
