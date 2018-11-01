@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = (sequelize, DataTypes) => {
   const Channel = sequelize.define('Channel', {
     channel: DataTypes.INTEGER,
@@ -6,9 +6,12 @@ module.exports = (sequelize, DataTypes) => {
     in_min: DataTypes.FLOAT,
     out_max: DataTypes.FLOAT,
     out_min: DataTypes.FLOAT
-  }, { underscored: true, tableName: 'Channel' });
+  }, {
+    underscored: true,
+    tableName: 'Channel'
+  })
   Channel.associate = function(models) {
     models.Channel.belongsTo(models.Raspi, { onDelete: 'cascade' })
-  };
-  return Channel;
-};
+  }
+  return Channel
+}
