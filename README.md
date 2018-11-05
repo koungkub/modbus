@@ -1,7 +1,17 @@
-# Modbus Server
+# Modbus System
 
-API Server for config raspberry pi
+## Project Structure
+- web
+- backend
 
-## You can run this project
+## How to run
 
-brabrbar
+`docker-compose up -d`
+
+### Web
+
+http://localhost:3001
+
+### Backend
+
+http://localhost:3000
