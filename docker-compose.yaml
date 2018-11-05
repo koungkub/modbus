@@ -1,0 +1,38 @@
+version: '3'
+
+services: 
+  modbus:
+    build: .
+    container_name: modbus
+    ports: 
+      - 3000:3000
+    depends_on:
+      - db
+    networks:
+      - 'modbusnetwork'
+    command: sh -c './wait-for db:3306 -- yarn migrate && yarn start'
+    environment: 
+      NODE_ENV: production
+      PORT: 3000
+      DB_USERNAME: koung
+      DB_PASSWORD: P@ssw0rd
+      DB_HOST: db
+      DB_DATABASE: modbus
+      SECRET_KEY: $welk203%@!
+    
+  db:
+    image: 'mysql:5.7'
+    container_name: db
+    ports: 
+      - 3306:3306
+    environment: 
+      MYSQL_USER: koung
+      MYSQL_DATABASE: modbus
+      MYSQL_PASSWORD: P@ssw0rd
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+      MYSQL_PORT: 3306
+    networks:
+      - 'modbusnetwork'
+
+networks: 
+  modbusnetwork:
