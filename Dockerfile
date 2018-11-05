@@ -5,9 +5,6 @@ WORKDIR /app
 COPY . /app
 
 RUN yarn install \
-  && yarn build \
-  && node_modules/.bin/sequelize db:migrate
+  && yarn build 
 
 EXPOSE 3000
-
-CMD ["yarn", "start"]

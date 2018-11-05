@@ -6,7 +6,7 @@ const fs = require("fs")
 const config = {}
 
 // Application entry point
-config.entry = "src/index.js"
+config.entry = "./src/index.js"
 
 // We build for node
 config.target = "node"
