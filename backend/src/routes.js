@@ -96,8 +96,9 @@ routes.delete('/factory/:id', [
       res
       .status(204)
       .json()
+    } else {
+      next(error(422, `Can not delete factory`))
     }
-    next(error(422, `Can not delete factory`))
   } catch (e) {
     next(error(422, `Can not delete factory`))
   }
@@ -162,8 +163,9 @@ routes.put('/raspi/:id', [
       res
       .status(204)
       .json()
+    } else {
+      next(error(422, `Can not update raspi !!`))
     }
-    next(error(422, `Can not update raspi !!`))
   } catch (e) {
     next(error(422, `Can not update raspi !!`))
   }
@@ -185,8 +187,9 @@ routes.delete('/raspi/:id', [
       res
       .status(204)
       .json()
+    } else {
+      next(error(422, `Can not delete raspi !!`))
     }
-    next(error(422, `Can not delete raspi !!`))
   } catch (e) {
     next(error(422, `Can not delete raspi !!`))
   }
@@ -246,8 +249,9 @@ routes.delete('/channel/:id', [
       res
       .status(204)
       .json()
+    } else {
+      next(error(422, `Can not delete channel !!`))
     }
-    next(error(422, `Can not delete channel !!`))
   } catch (e) {
     next(error(422, `Can not delete channel !!`))
   }
@@ -274,7 +278,6 @@ routes.get('/config/:mac', [
       .json(config)
     }
   } catch (e) {
-    console.log(e)
     next(error(422, `Can not get config !!`))
   }
 })
