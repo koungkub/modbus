@@ -1,18 +1,18 @@
 const models = require('../../models')
 
 module.exports = {
-  async createRaspi(factory, modbusIp, macAddress) {
-    return await models.Raspi.create({
+  async createRpi(factory, modbusIp, macAddress) {
+    return await models.Rpi.create({
       factory_id: factory,
       mac_address: macAddress,
       modbus_ip: modbusIp
     })
   },
-  async listRaspi() {
+  async listRpi() {
     return await models.Factory.findAll({
       include: [
         {
-          model: models.Raspi,
+          model: models.Rpi,
           include: [
             {
               model: models.Channel,
@@ -25,9 +25,30 @@ module.exports = {
       attributes: [ 'id', 'factory' ]
     })
   },
-  async updateRaspi(id, modbusIp) {
-    return await models.Raspi.update({
-      modbus_ip: modbusIp
+  async findRpi(id) {
+    return await models.Rpi.findById(id, {
+      attributes: [ 'id', 'modbus_ip', 'mac_address' ]
+    })
+  },
+  async listRpiOfFactory(fId, rId) {
+    return await models.Factory.findOne({
+      where: {
+        id: fId
+      },
+      attributes: [ 'factory', 'name', 'address', 'tel' ],
+      include: {
+        model: models.Rpi,
+        attributes: [ 'mac_address', 'modbus_ip' ],
+        where: {
+          id: rId
+        }
+      }
+    })
+  },
+  async updateRaspi(id, modbus_ip, mac_address) {
+    return await models.Rpi.update({
+      modbus_ip,
+      mac_address
     }, {
       where: {
         id
@@ -35,14 +56,14 @@ module.exports = {
     })
   },
   async deleteRaspi(id) {
-    return await models.Raspi.destroy({
+    return await models.Rpi.destroy({
       where: {
         id
       }
     })
   },
   async raspiGetConfig(macAddress) {
-    return await models.Raspi.findOne({
+    return await models.Rpi.findOne({
       where: {
         mac_address: macAddress
       },
