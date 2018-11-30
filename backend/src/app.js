@@ -12,6 +12,12 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  next()
+})
+
 app.use(routes)
 
 app.use((req, res, next) => {
@@ -23,10 +29,10 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
   res
-  .status(err.status || 500)
-  .json({
-    message: err.message || 'Internal Server Error'
-  })
+    .status(err.status || 500)
+    .json({
+      message: err.message || 'Internal Server Error'
+    })
 })
 
 module.exports = app
