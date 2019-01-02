@@ -1,6 +1,5 @@
 const { validationResult, body, param } = require('express-validator/check')
 const { Router } = require('express')
-const models = require('../models')
 const error = require('./error')
 const factoryService = require('./service/factory')
 const raspiService = require('./service/raspi')

@@ -5,6 +5,6 @@ WORKDIR /app
 COPY . /app
 
 RUN yarn install \
-  && yarn build 
+  && yarn build
 
 EXPOSE 3000

@@ -3,7 +3,7 @@ version: '3'
 services:
   modbus:
     build: ./backend
-    container_name: modbus
+    # container_name: modbus
     ports:
       - 3000:3000
     depends_on:
@@ -18,11 +18,12 @@ services:
       DB_PASSWORD: P@ssw0rd
       DB_HOST: db
       DB_DATABASE: modbus
+      DB_PORT: 3306
       SECRET_KEY: $welk203%@!
 
   db:
     image: 'mysql:5.7'
-    container_name: db
+    # container_name: db
     ports:
       - 3306:3306
     environment:
