@@ -12,12 +12,26 @@ module.exports = {
   },
   async findFactory(id) {
     return await models.Factory.findById(id, {
-      include: [models.Rpi]
+      include: [{
+        model: models.Rpi,
+        include: [{
+          model: models.Channel
+        }]
+      }]
     })
   },
   async listFactory() {
     return await models.Factory.findAll({
-      include: [models.Rpi],
+      include: [
+        {
+          model: models.Rpi,
+          include: [
+            {
+              model: models.Channel
+            }
+          ]
+        }
+      ]
     });
   },
   async updateFactory(id, factory, name, address, tel) {
