@@ -22,18 +22,18 @@ const FactoryCard = ({ classes, factory = {} }) => (
     <Grid container spacing={16}>
       <Grid item sm>
         <Typography variant="h6" gutterBottom>
-          Name: <span>โรงงานไง</span>
+          Name: <span>{factory.name}</span>
         </Typography>
         <Typography variant="h6" gutterBottom>
-          Address: <span>โรงงานไง</span>
+          Address: <span>{factory.address}</span>
         </Typography>
         <Typography variant="h6" gutterBottom>
-          Tel: <span>โรงงานไง</span>
+          Tel: <span>{factory.tel}</span>
         </Typography>
       </Grid>
       <Grid item sm>
         <Typography variant="h6" gutterBottom>
-          จำนวน RPi: <span>20/20</span>
+          จำนวน RPi: <span>{factory.rpis && factory.rpis.length}</span>
         </Typography>
       </Grid>
     </Grid>

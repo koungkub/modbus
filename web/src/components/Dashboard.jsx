@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Typography, withStyles } from '@material-ui/core';
 import FactoryCard from './Factory/FactoryCard';
+import service from '../service';
 
 const styles = () => ({
   link: {
@@ -40,22 +41,48 @@ const factoryList = [
 
 ];
 
-const Dashboard = ({ classes }) => {
-  const factoryListItems = factoryList.map(factory => (
-    // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    <Link to={`/factory/${factory.id}`} className={classes.link} key={factory.id}>
-      <FactoryCard factory={factory} />
-    </Link>
-  ));
+class Dashboard extends Component {
+  constructor() {
+    super();
+    this.state = {
+      factoryList: [],
+    }
+  }
 
-  return (
-    <div>
-      <Title count={factoryList.length} />
-      {factoryListItems}
-    </div>
-  );
+  componentDidMount() {
+    this.fetchFactory();
+  }
+
+  async fetchFactory() {
+    try {
+      const response = await service.get('/factory')
+      const factoryList = response.data || []
+      this.setState({ factoryList })
+      console.log(factoryList)
+    }
+    catch(ex) {
+      console.error(ex)
+    }
+  }
+
+  render() {
+    const { classes } = this.props;
+    const { factoryList } = this.state;
+    const factoryListItems = factoryList.map(factory => (
+      // eslint-disable-next-line jsx-a11y/anchor-is-valid
+      <Link to={`/factory/${factory.id}`} className={classes.link} key={factory.id}>
+        <FactoryCard factory={factory} />
+      </Link>
+    ));
+
+    return (
+      <div>
+        <Title count={factoryList.length} />
+        {factoryListItems}
+      </div>
+    );
+  }
 }
-
 Dashboard.propTypes = {
   classes: PropTypes.object,
 };

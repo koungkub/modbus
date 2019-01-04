@@ -46,7 +46,7 @@ const styles = theme => ({
 const RpiList = ({ rpis = [], ...props }) => {
   const { classes } = props;
   return <div className={classes.root}>
-    {rpis.map(rpi => <ExpansionPanel>
+    {rpis.map(rpi => <ExpansionPanel key={rpi.id}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography className={classes.heading}>RPI#{rpi.id}</Typography>
           <Typography className={classes.secondaryHeading}>
