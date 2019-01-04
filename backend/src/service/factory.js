@@ -1,3 +1,4 @@
+const Sequelize = require("sequelize");
 const models = require('../../models')
 
 module.exports = {
@@ -11,13 +12,13 @@ module.exports = {
   },
   async findFactory(id) {
     return await models.Factory.findById(id, {
-      attributes: [ 'factory', 'name', 'address', 'tel' ]
+      include: [models.Rpi]
     })
   },
   async listFactory() {
     return await models.Factory.findAll({
-      attributes: [ 'id', 'factory', 'name', 'address', 'tel' ]
-    })
+      include: [models.Rpi],
+    });
   },
   async updateFactory(id, factory, name, address, tel) {
     await models.Factory.update({

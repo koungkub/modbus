@@ -17,6 +17,7 @@ routes.get('/factory', async (req, res, next) => {
       .status(200)
       .json(listFactory)
   } catch (e) {
+    console.error(e)
     next(error(422, 'Can not list factory'))
   }
 })
@@ -36,15 +37,17 @@ routes.get('/factory/:id', [
 
   try {
     const factory = await factoryService.findFactory(req.params.id)
+    console.log(factory)
     if (factory === null) {
-      next(error(422, 'Factory was exists !!'))
+      next(error(422, 'Factory was not exists !!'))
     } else {
       res
         .status(201)
         .json(factory)
     }
   } catch (e) {
-    next(error(422, 'Factory was exists !!'))
+    console.error(e)
+    next(error(422, "Factory was not exists !!"));
   }
 })
 
@@ -78,7 +81,8 @@ routes.post('/factory', [
       .status(201)
       .json(factories)
   } catch (e) {
-    next(error(422, 'Factory was exists !!'))
+    console.error(e)
+    next(error(422, 'Factory was not exists !!'))
   }
 })
 
@@ -111,6 +115,7 @@ routes.put('/factory/:id', [
     const { id } = req.params
 
     const status = await factoryService.findFactory(id)
+    console.log(status)
 
     if (status === null) {
       next(error(422, `Can not update factory`))
@@ -121,6 +126,7 @@ routes.put('/factory/:id', [
         .json({})
     }
   } catch (e) {
+    console.error(e)
     next(error(422, `Can not update factory`))
   }
 })
@@ -148,6 +154,7 @@ routes.delete('/factory/:id', [
       next(error(422, `Can not delete factory`))
     }
   } catch (e) {
+    console.error(e)
     next(error(422, `Can not delete factory`))
   }
 })
@@ -159,10 +166,12 @@ routes.delete('/factory/:id', [
 routes.get('/rpi', async (req, res, next) => {
   try {
     const listRaspi = await rpiService.listRpi()
+    console.log(listRaspi);
     res
       .status(200)
       .json(listRaspi)
   } catch (e) {
+    console.error(e)
     next(error(422, `Can not list raspi !!`))
   }
 })
@@ -197,6 +206,7 @@ routes.get('/factory/:fId/rpi/:rId', [
         .json(list)
     }
   } catch (e) {
+    console.error(e)
     next(error(422, `Can not update raspi !!`))
   }
 })
@@ -230,6 +240,7 @@ routes.post('/rpi/:id', [
         message: 'Created'
       })
   } catch (e) {
+    console.error(e)
     next(error(422, `Can not create raspi !!`))
   }
 })
@@ -271,6 +282,7 @@ routes.put('/factory/:fId/rpi/:rId', [
         .json()
     }
   } catch (e) {
+    console.error(e)
     next(error(422, `Can not update raspi !!`))
   }
 })
@@ -305,6 +317,7 @@ routes.delete('/factory/:fId/rpi/:rId', [
         .json()
     }
   } catch (e) {
+    console.error(e)
     next(error(422, `Can not delete raspi !!`))
   }
 })
@@ -343,6 +356,7 @@ routes.post('/channel/:id', [
         message: 'Created'
       })
   } catch (e) {
+    console.error(e)
     next(error(422, `Can not add channel to raspi !!`))
   }
 })
@@ -383,6 +397,7 @@ routes.put('/channel/:id', [
         .json()
     }
   } catch (e) {
+    console.error(e)
     next(error(422, `Can not add channel to raspi !!`))
   }
 })
@@ -408,6 +423,7 @@ routes.delete('/channel/:id', [
       next(error(422, `Can not delete channel !!`))
     }
   } catch (e) {
+    console.error(e)
     next(error(422, `Can not delete channel !!`))
   }
 })
@@ -433,6 +449,7 @@ routes.get('/config/:mac', [
       .json(config)
     }
   } catch (e) {
+    console.error(e)
     next(error(422, `Can not get config !!`))
   }
 })
