@@ -20,6 +20,7 @@ services:
       DB_DATABASE: modbus
       DB_PORT: 3306
       SECRET_KEY: $welk203%@!
+
   frontweb:
     build: ./web
     container_name: web
