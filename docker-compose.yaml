@@ -19,6 +19,15 @@ services:
       DB_HOST: db
       DB_DATABASE: modbus
       SECRET_KEY: $welk203%@!
+  frontweb:
+    build: ./web
+    container_name: web
+    ports:
+      - 3001:80
+    depends_on:
+      - db
+    networks:
+      - 'modbusnetwork'
 
   db:
     image: 'mysql:5.7'
