@@ -1,34 +1,30 @@
 const models = require('../../models')
 
 module.exports = {
-  async createFactory(factory) {
+  async createFactory(factory, name, address, tel) {
     return await models.Factory.create({
-      factory
-    })
+      factory,
+      name,
+      address,
+      tel,
+    },)
   },
-  async findExistsFactoryName(factory) {
-    const isExist = await models.Factory.findOne({
-      where: {
-        factory
-      }
+  async findFactory(id) {
+    return await models.Factory.findById(id, {
+      attributes: [ 'factory', 'name', 'address', 'tel' ]
     })
-
-    if (isExist) {
-      return true
-    }
-    return false
   },
   async listFactory() {
     return await models.Factory.findAll({
-      attributes: [
-        'id',
-        'factory'
-      ]
+      attributes: [ 'id', 'factory', 'name', 'address', 'tel' ]
     })
   },
-  async updateFactory(id, factory) {
+  async updateFactory(id, factory, name, address, tel) {
     await models.Factory.update({
-      factory
+      factory,
+      name,
+      address,
+      tel
     }, {
       where: {
         id

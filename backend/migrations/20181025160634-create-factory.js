@@ -8,9 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      factory: {
-        type: Sequelize.STRING
-      },
+      factory: Sequelize.STRING,
+      name: Sequelize.STRING,
+      address: Sequelize.STRING,
+      tel: Sequelize.STRING,
       created_at: {
         allowNull: false,
         type: Sequelize.DATE

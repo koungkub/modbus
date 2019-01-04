@@ -23,12 +23,12 @@ module.exports = {
       out_min: {
         type: Sequelize.FLOAT
       },
-      raspi_id: {
+      rpi_id: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         allowNull: false,
         references: {
-          model: 'Raspi',
+          model: 'Rpi',
           key: 'id'
         }
       },
