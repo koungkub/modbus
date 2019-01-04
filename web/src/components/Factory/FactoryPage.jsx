@@ -45,6 +45,7 @@ const factoryMock = {
 };
 
 const FactoryPage = ({ factory = factoryMock, classes }) => {
+  console.log(factory)
   return (
     <div>
       <Typography variant="h4" gutterBottom>
@@ -54,7 +55,7 @@ const FactoryPage = ({ factory = factoryMock, classes }) => {
       <Typography variant="h5" gutterBottom>
         Raspberry Pi ที่ถูกติดตั้งในโรงงาน
       </Typography>
-      <RpiList rpis={factory.rpis} />
+      <RpiList rpis={factory.Rpis} />
       <div className={classes.clearfix} />
     </div>
   )

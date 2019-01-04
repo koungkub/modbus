@@ -33,7 +33,7 @@ const FactoryCard = ({ classes, factory = {} }) => (
       </Grid>
       <Grid item sm>
         <Typography variant="h6" gutterBottom>
-          จำนวน RPi: <span>{factory.rpis && factory.rpis.length}</span>
+          จำนวน RPi: <span>{factory.Rpis && factory.Rpis.length}</span>
         </Typography>
       </Grid>
     </Grid>

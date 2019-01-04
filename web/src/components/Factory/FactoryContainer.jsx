@@ -13,7 +13,6 @@ class FactoryContainer extends React.Component {
   };
 
   componentDidMount() {
-    console.log(this.props.match)
     this.fetchFactory(this.props.match.params.id)
   }
 
