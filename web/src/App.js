@@ -4,7 +4,7 @@ import { MuiThemeProvider } from '@material-ui/core';
 import './App.css';
 import Dashboard from './components/Dashboard';
 import { Layout } from './components/Layout';
-import FactoryPage from './components/Factory/FactoryPage';
+import FactoryPage from './components/Factory/FactoryContainer';
 import theme from './theme';
 
 const App = () => (
