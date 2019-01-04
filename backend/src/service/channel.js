@@ -1,16 +1,29 @@
 const models = require('../../models')
 
 module.exports = {
-  async createChannel(id, channels) {
+  async createChannel(rpi_id, channels) {
     const { channel, in_max, in_min, out_max, out_min } = channels
 
     return await models.Channel.create({
-      raspi_id: id,
+      rpi_id,
       channel,
       in_max,
       in_min,
       out_max,
       out_min
+    })
+  },
+  async updateChannel(id, channel, in_max, in_min, out_max, out_min) {
+    return await models.Channel.update({
+      channel,
+      in_max,
+      in_min,
+      out_max,
+      out_min
+    }, {
+      where: {
+        id
+      }
     })
   },
   async deleteChannel(id) {

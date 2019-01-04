@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'Channel'
   })
   Channel.associate = function(models) {
-    models.Channel.belongsTo(models.Raspi, { onDelete: 'cascade' })
+    models.Channel.belongsTo(models.Rpi, { onDelete: 'cascade' })
   }
   return Channel
 }
