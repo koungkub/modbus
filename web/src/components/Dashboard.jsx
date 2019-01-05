@@ -22,25 +22,6 @@ const Title = ({ count = 0 }) => (
   </div>
 );
 
-const factoryList = [
-  {
-    id: 1,
-  },
-  {
-    id: 2,
-  },
-  {
-    id: 3,
-  },
-  {
-    id: 4,
-  },
-  {
-    id: 5,
-  },
-
-];
-
 class Dashboard extends Component {
   constructor() {
     super();
