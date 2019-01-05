@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import {
   Grid,
   withStyles,
@@ -14,6 +15,7 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChannelEditorialDialog from './ChannelEditorialDialog';
 import { ChannelService, RpiService } from '../../service';
+import { getFactory } from '../../redux/factory/action';
 
 
 const styles = theme => ({
@@ -59,10 +61,10 @@ class RpiPanel extends Component {
 
   handleSubmit = async (rpi, channels) => {
     const rpiPromise = RpiService.update(rpi)
-
-    const done = await Promise.all([rpiPromise])
+    const channelPromises = channels.map(data => ChannelService.update(data))
+    const done = await Promise.all([rpiPromise, ...channelPromises])
     console.log('RpiPanel.handleSubmit', done)
-    // console.log('RpiPanel.handleSubmit', response)
+    this.props.getFactory(rpi.factory_id)
   }
 
   render() {
@@ -128,4 +130,14 @@ RpiPanel.propTypes = {
   onSubmit: PropTypes.func,
 };
 
-export default withStyles(styles)(RpiPanel);
+const mapStateToProps = state => ({
+})
+
+const mapDispatchToProps = dispatch => ({
+  getFactory: factoryId => dispatch(getFactory(factoryId)),
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(RpiPanel));
