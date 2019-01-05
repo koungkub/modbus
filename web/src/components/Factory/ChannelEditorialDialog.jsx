@@ -83,7 +83,7 @@ class ChannelEditorialDialog extends Component {
 
     return <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth={"md"} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">
-          แก้ไข : RPI# {rpi.id}
+          RPI# {rpi.id} : แก้ไขข้อมูล
         </DialogTitle>
         <DialogContent>
           <div>

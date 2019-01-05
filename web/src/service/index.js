@@ -3,6 +3,16 @@ import client from './client';
 const headers = { 'Content-Type': 'application/json' };
 
 const ChannelService = {
+  add: (rpiId, data) => {
+    const uri = `/channel/${rpiId}`;
+    return client.post(uri, {
+      channel: data.channel,
+      in_max: data.in_max,
+      in_min: data.in_min,
+      out_max: data.out_max,
+      out_min: data.out_min,
+    });
+  },
   update: data => {
     const uri = `/channel/${data.id}`;
     return client.put(uri, {
