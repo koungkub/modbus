@@ -25,6 +25,13 @@ const RpiService = {
   },
 };
 
+const FactoryService = {
+  get: id => {
+    const uri = `/factory/${id}`;
+    return client.get(uri);
+  },
+};
+
 export default client;
 
-export { ChannelService, RpiService };
+export { ChannelService, RpiService, FactoryService };

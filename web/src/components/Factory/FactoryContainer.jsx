@@ -1,51 +1,40 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core';
+import { connect } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
 import FactoryPage from './FactoryPage';
-import service from '../../service';
-
-const styles = theme => ({
-  progress: {
-    margin: theme.spacing.unit * 2,
-  },
-});
+import { getFactory } from '../../redux/factory/action'
 
 class FactoryContainer extends React.Component {
   state = {}
 
   componentDidMount() {
-    this.fetchFactory(this.props.match.params.id)
-  }
-
-  async fetchFactory(factoryId) {
-    try {
-      this.loading();
-      const response = await service.get(`/factory/${factoryId}`);
-      const factory = response.data;
-      this.setState({ factory });
-      this.done();
-      console.log(factory)
-    } catch (ex) {
-      console.error(ex);
-    }
+    this.props.getFactory(this.props.match.params.id);
   }
 
   loading = () => this.setState({ loading: true })
   done = () => this.setState({ loading: false })
 
   render() {
-    const { classes } = this.props;
-    const { factory, loading = true } = this.state;
+    const { factory, isFetching = true } = this.props;
 
-    if (loading) {
-      return <div>
-        <CircularProgress className={classes.progress} />
-      </div>;
+    if (isFetching) {
+      return <CircularProgress />;
     }
 
     return <FactoryPage factory={factory} />;
   }
 };
 
-export default withStyles(styles)(FactoryContainer);
+const mapStateToProps = state => ({
+  factory: state.factory.data,
+  isFetching: state.factory.isFetching,
+})
+
+const mapDispatchToProps = dispatch => ({
+  getFactory: factoryId => dispatch(getFactory(factoryId)),
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FactoryContainer);
