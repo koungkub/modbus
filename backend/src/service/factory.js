@@ -35,7 +35,7 @@ module.exports = {
     });
   },
   async updateFactory(id, factory, name, address, tel) {
-    await models.Factory.update({
+    return await models.Factory.update({
       factory,
       name,
       address,

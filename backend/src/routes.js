@@ -120,10 +120,10 @@ routes.put('/factory/:id', [
     if (status === null) {
       next(error(422, `Can not update factory`))
     } else {
-      await factoryService.updateFactory(id, factory, name, address. tel)
+      const response = await factoryService.updateFactory(id, factory, name, address. tel)
       res
-        .status(204)
-        .json({})
+        .status(200)
+        .json(response)
     }
   } catch (e) {
     console.error(e)
