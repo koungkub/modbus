@@ -19,6 +19,20 @@ export const getFactory = id => async dispatch => {
   }
 };
 
+export const updateFactory = data => async dispatch => {
+  dispatch(fetch());
+
+  try {
+    await FactoryService.update(data.id, data);
+    const response = await FactoryService.get(data.id);
+    const factory = response.data;
+    dispatch(receivedFactory(factory));
+  } catch (error) {
+    console.error(error);
+    dispatch(receivedFail(error));
+  }
+};
+
 export const fetch = () => ({
   type: FETCH,
   payload: {},
@@ -31,5 +45,10 @@ export const receivedFail = () => ({
 
 export const receivedFactory = data => ({
   type: RECEIVED,
+  payload: { data },
+});
+
+export const updatedFactory = data => ({
+  type: UPDATED,
   payload: { data },
 });

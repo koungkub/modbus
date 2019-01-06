@@ -10,12 +10,6 @@ export default function factoryReducer(
   action
 ) {
   switch (action.type) {
-    case UPDATED:
-      return {
-        ...state,
-        isFetching: false,
-        isFailed: false,
-      };
     case FETCH:
       return {
         ...state,
@@ -23,6 +17,7 @@ export default function factoryReducer(
         isFailed: false,
       };
     case RECEIVED:
+    case UPDATED:
       return {
         ...state,
         data: action.payload.data,

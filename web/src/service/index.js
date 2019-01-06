@@ -1,7 +1,5 @@
 import client from './client';
 
-const headers = { 'Content-Type': 'application/json' };
-
 const ChannelService = {
   add: (rpiId, data) => {
     const uri = `/channel/${rpiId}`;
@@ -39,6 +37,15 @@ const FactoryService = {
   get: id => {
     const uri = `/factory/${id}`;
     return client.get(uri);
+  },
+  update: (id, data) => {
+    const uri = `/factory/${id}`;
+    return client.put(uri, {
+      factory: data.factory,
+      name: data.name,
+      address: data.address,
+      tel: data.tel,
+    });
   },
 };
 
