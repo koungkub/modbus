@@ -13,6 +13,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { withSnackbar } from 'notistack';
 import ChannelEditorialDialog from './ChannelEditorialDialog';
 import AddChannelDialog from './AddChannelDialog';
 import { ChannelService, RpiService } from '../../service';
@@ -65,17 +66,19 @@ class RpiPanel extends Component {
     this.setState({ addChannelDialog });
 
   handleSubmit = async (rpi, channels) => {
+    const { enqueueSnackbar } = this.props;
     const rpiPromise = RpiService.update(rpi);
     const channelPromises = channels.map(data => ChannelService.update(data));
     const done = await Promise.all([rpiPromise, ...channelPromises]);
-    console.log('RpiPanel.handleSubmit', done);
     this.props.getFactory(rpi.factory_id);
+    enqueueSnackbar('Successfully updated the data.', { variant: 'success' });
   };
 
   handleAddChannel = async (channel) => {
-    const { rpi } = this.props
-    const response = await ChannelService.add(rpi.id, channel)
+    const { enqueueSnackbar, rpi } = this.props
+    await ChannelService.add(rpi.id, channel)
     this.props.getFactory(rpi.factory_id);
+    enqueueSnackbar('Successfully added the channel.', { variant: 'success' });
   }
 
   render() {
@@ -171,4 +174,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(RpiPanel));
+)(withSnackbar(withStyles(styles)(RpiPanel)));
