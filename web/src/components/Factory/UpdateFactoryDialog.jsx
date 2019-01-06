@@ -69,7 +69,6 @@ class UpdateFactoryDialog extends Component {
         </DialogTitle>
       <DialogContent>
         <div>
-          <TextField id="factory" label="Factory" className={classes.textField} value={factory.factory} onChange={this.handleChange('factory')} margin="normal" />
           <TextField id="name" label="Name" className={classes.textField} value={factory.name} onChange={this.handleChange('name')} margin="normal" />
           <TextField id="address" label="Address" className={classes.textField} value={factory.address} onChange={this.handleChange('address')} margin="normal" />
           <TextField id="tel" label="Tel" className={classes.textField} value={factory.tel} onChange={this.handleChange('tel')} margin="normal" />

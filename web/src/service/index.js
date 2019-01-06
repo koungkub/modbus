@@ -47,6 +47,13 @@ const FactoryService = {
       tel: data.tel,
     });
   },
+  addRpi: (id, data) => {
+    const uri = `/rpi/${id}`;
+    return client.post(uri, {
+      modbus_ip: data.modbus_ip,
+      mac_address: data.mac_address,
+    });
+  },
 };
 
 export default client;

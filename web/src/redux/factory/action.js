@@ -33,6 +33,20 @@ export const updateFactory = data => async dispatch => {
   }
 };
 
+export const addRpi = (factoryId, data) => async dispatch => {
+  dispatch(fetch());
+
+  try {
+    await FactoryService.addRpi(factoryId, data);
+    const response = await FactoryService.get(factoryId);
+    const factory = response.data;
+    dispatch(receivedFactory(factory));
+  } catch (error) {
+    console.error(error);
+    dispatch(receivedFail(error));
+  }
+};
+
 export const fetch = () => ({
   type: FETCH,
   payload: {},

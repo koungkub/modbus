@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Typography, TextField, Dialog, DialogActions, DialogContent, DialogTitle, withStyles } from '@material-ui/core';
+import {
+  Button,
+  Typography,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  withStyles,
+} from '@material-ui/core';
 
 const styles = theme => ({
   root: {
@@ -22,62 +31,52 @@ const styles = theme => ({
   },
 });
 
-const emptyRpi = {
-      modbus_ip: '',
-      mac_address: '',
-    }
-
 class AddRpiDialog extends Component {
-  
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = { open: false, rpi: {} };
+  }
 
-    this.state = { open: false, rpi: empty};
+  componentDidMount() {
+    const { factory } = this.props;
+    this.setState({ factory });
   }
 
   handleChange = name => event => {
-    const rpi = {
-      ...this.state.rpi, 
+    const factory = {
+      ...this.state.factory,
       [name]: event.target.value,
-    }
-    this.setState({ rpi });
+    };
+    this.setState({ factory });
   };
 
   handleSubmit = () => {
     const { handleSubmit } = this.props;
-    const { rpi } = this.state;
+    const { factory } = this.state;
 
     if (handleSubmit) {
-      handleSubmit(rpi);
+      handleSubmit(factory);
     }
   };
-
-  empty = () => {
-    this.setState({ rpi: emptyRpi })
-  }
 
   handleClose = () => {
     const { handleClose } = this.props;
 
-    this.empty()
-
     if (handleClose) {
       handleClose();
     }
-  }
+  };
 
   render() {
-    const { open, classes } = this.props;
+    const { open, classes, factory } = this.props;
     const { rpi } = this.state;
 
-    return <Dialog open={open} onClose={this.handleClose} fullWidth={true} maxWidth={"md"} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">
-          เพิ่ม Raspberry Pi
-        </DialogTitle>
+    return <Dialog open={open} onClose={this.handleClose} fullWidth={true} maxWidth={'md'} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">เพิ่ม Raspberry Pi</DialogTitle>
         <DialogContent>
           <div>
-            <TextField id="mac-address" label="Mac Address" className={classes.textField} value={rpi.mac_address} onChange={this.handleChange('mac_address')} margin="normal" />
-            <TextField id="modbus-ip" label="Modbus IP" className={classes.textField} value={rpi.modbus_ip} onChange={this.handleChange('modbus_ip')} margin="normal" />
+            <TextField id="mac_address" label="Mac Address" className={classes.textField} value={rpi.mac_address} onChange={this.handleChange('mac_address')} margin="normal" />
+            <TextField id="modbus_ip" label="Modbus Ip" className={classes.textField} value={rpi.modbus_ip} onChange={this.handleChange('modbus_ip')} margin="normal" />
           </div>
         </DialogContent>
         <DialogActions>
