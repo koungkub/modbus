@@ -6,3 +6,5 @@ def getMac(interface='eth0'):
         mac_address = "00:00:00:00:00:00"
     finally:
         return mac_address[0:17]
+
+print(getMac())
